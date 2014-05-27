@@ -4,7 +4,7 @@ import "testing"
 import "fmt"
 import "os"
 
-type ProxyTestee struct {
+type Testee struct {
 	t        *testing.T
 	actual   interface{}
 	expected interface{}
@@ -25,32 +25,32 @@ var (
 	}
 )
 
-func Expect(t *testing.T, actual interface{}) *ProxyTestee {
-	return &ProxyTestee{t: t, actual: actual, Result: Result{OK: true}}
+func Expect(t *testing.T, actual interface{}) *Testee {
+	return &Testee{t: t, actual: actual, Result: Result{OK: true}}
 }
-func (p *ProxyTestee) Dry() *ProxyTestee {
-	p.dry = true
-	return p
+func (testee *Testee) Dry() *Testee {
+	testee.dry = true
+	return testee
 }
-func (p *ProxyTestee) failed(fail ...int) *ProxyTestee {
+func (testee *Testee) failed(fail ...int) *Testee {
 	f := FailBase
 	if 0 < len(fail) {
 		f = fail[0]
 	}
-	return p.failWith(f)
+	return testee.failWith(f)
 }
-func (p *ProxyTestee) failWith(fail int) *ProxyTestee {
+func (testee *Testee) failWith(fail int) *Testee {
 	message := fmt.Sprintf(
 		Scolds[fail],
-		p.expected,
-		p.actual,
+		testee.expected,
+		testee.actual,
 	)
-	if !p.dry {
+	if !testee.dry {
 		fmt.Println(message)
-		p.t.Fail()
+		testee.t.Fail()
 		os.Exit(1)
 	}
-	p.Result.OK = false
-	p.Result.Message = message
-	return p
+	testee.Result.OK = false
+	testee.Result.Message = message
+	return testee
 }
