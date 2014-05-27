@@ -7,7 +7,7 @@ func (testee *Testee) ToBe(expected interface{}) *Testee {
 		return testee
 	}
 	testee.expected = expected
-	return testee.failed()
+	return testee.failed(FailBase)
 }
 
 // FIXME: Is `string` the base way?
@@ -16,5 +16,5 @@ func (testee *Testee) TypeOf(typeName string) *Testee {
 		return testee
 	}
 	testee.expected = typeName
-	return testee.failed()
+	return testee.failed(FailType)
 }
