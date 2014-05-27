@@ -18,6 +18,8 @@ func TestYour_SomeFunc(t *testing.T) {
 
     mint.Expect(t, "foo").TypeOf("string")
 
+    mint.Expect(t, "exists").Not().ToBe(nil)
+
     // You can run assertions without os.Exit
     res := mint.Expect(t, "foo").Dry().ToBe("bar").Result
     // res.OK == false

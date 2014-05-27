@@ -24,6 +24,7 @@ func TestMint_TypeOf_Fail(t *testing.T) {
 func TestMint_Not(t *testing.T) {
 	mint.Expect(t, 100).Not().ToBe(200)
 	mint.Expect(t, "foo").Not().TypeOf("int")
+	mint.Expect(t, true).Not().ToBe(nil)
 }
 func TestMint_Not_Fail(t *testing.T) {
 	r := mint.Expect(t, "foo").Dry().Not().TypeOf("string").Result
