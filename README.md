@@ -13,8 +13,13 @@ import "testing"
 import "github.com/otiai10/mint"
 
 func TestYour_SomeFunc(t *testing.T) {
+
     mint.Expect(t, 1).ToBe(1)
 
     mint.Expect(t, "foo").TypeOf("string")
+
+    // You can run assertions without os.Exit
+    res := mint.Expect(t, "foo").Dry().ToBe("bar")
+    // res.OK == false
 }
 ```
