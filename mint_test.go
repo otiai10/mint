@@ -12,8 +12,13 @@ func TestMint_ToBe_Fail(t *testing.T) {
 	mint.Expect(t, r.OK).ToBe(false)
 }
 
+type MyStruct struct{}
+
 func TestMint_TypeOf(t *testing.T) {
 	mint.Expect(t, "foo").TypeOf("string")
+
+	bar := MyStruct{}
+	mint.Expect(t, bar).TypeOf("mint_test.MyStruct")
 }
 func TestMint_TypeOf_Fail(t *testing.T) {
 	r := mint.Expect(t, "foo").Dry().TypeOf("int").Result
