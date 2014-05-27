@@ -38,7 +38,8 @@ func TestYour_SomeFunc(t *testing.T) {
 }
 ```
 
-# Development under behavior driven itself
+# contributions
+Behavior Driven Development itself
 ```sh
 git clone github.com/otia10/mint
 cd mint
