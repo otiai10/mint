@@ -13,11 +13,11 @@ type ProxyTestee struct {
 var (
 	FailBase = 0
 	FailType = 1
+	Scolds   = map[int]string{
+		FailBase: "Expected to be `%+v`, but actual `%+v`\n",
+		FailType: "Expectec type `%+v`, but actual `%T`\n",
+	}
 )
-var Scolds = map[int]string{
-	FailBase: "Expected to be `%+v`, but actual `%+v`\n",
-	FailType: "Expectec type `%+v`, but actual `%T`\n",
-}
 
 func Expect(t *testing.T, actual interface{}) *ProxyTestee {
 	return &ProxyTestee{t: t, actual: actual}
