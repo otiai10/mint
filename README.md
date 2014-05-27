@@ -17,23 +17,24 @@ package your_test
 
 import "your"
 import "testing"
-import "github.com/otiai10/mint"
-// import globally if you want to omit package name
-// import . "github.com/otiai10/mint"
+// Import globally
+import . "github.com/otiai10/mint"
+// Or import by package name such as
+// import "github.com/otiai10/mint"
 
 func TestYour_SomeFunc(t *testing.T) {
 
-    mint.Expect(t, 1).ToBe(1)
+    Expect(t, 1).ToBe(1)
 
-    mint.Expect(t, "foo").TypeOf("string")
+    Expect(t, "foo").TypeOf("string")
 
-    mint.Expect(t, "exists").Not().ToBe(nil)
+    Expect(t, "exists").Not().ToBe(nil)
 
-    mint.Expect(t, your.SomeFunc()).ToBe("My Func!!")
+    Expect(t, your.SomeFunc()).ToBe("My Func!!")
     // If assertion failed, exit 1 with message.
 
     // You can run assertions without os.Exit
-    res := mint.Expect(t, "foo").Dry().ToBe("bar").Result
+    res := Expect(t, "foo").Dry().ToBe("bar").Result
     // res.OK == false
 }
 ```
