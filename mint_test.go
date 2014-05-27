@@ -20,3 +20,13 @@ func TestMint_TypeOf_Fail(t *testing.T) {
 	// assert mint by using mint
 	mint.Expect(t, r.OK).ToBe(false)
 }
+
+func TestMint_Not(t *testing.T) {
+	mint.Expect(t, 100).Not().ToBe(200)
+	mint.Expect(t, "foo").Not().TypeOf("int")
+}
+func TestMint_Not_Fail(t *testing.T) {
+	r := mint.Expect(t, "foo").Dry().Not().TypeOf("string").Result
+	// assert mint by using mint
+	mint.Expect(t, r.OK).Not().ToBe(true)
+}

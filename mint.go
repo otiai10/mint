@@ -9,6 +9,7 @@ type Testee struct {
 	actual   interface{}
 	expected interface{}
 	dry      bool
+	not      bool
 	Result   Result
 }
 type Result struct {
@@ -20,8 +21,8 @@ var (
 	FailBase = 0
 	FailType = 1
 	Scolds   = map[int]string{
-		FailBase: "Expected to be `%+v`, but actual `%+v`\n",
-		FailType: "Expectec type `%+v`, but actual `%T`\n",
+		FailBase: "Expected %sto be `%+v`, but actual `%+v`\n",
+		FailType: "Expectec %stype `%+v`, but actual `%T`\n",
 	}
 )
 
@@ -32,6 +33,10 @@ func (testee *Testee) Dry() *Testee {
 	testee.dry = true
 	return testee
 }
+func (testee *Testee) Not() *Testee {
+	testee.not = true
+	return testee
+}
 func (testee *Testee) failed(fail ...int) *Testee {
 	f := FailBase
 	if 0 < len(fail) {
@@ -40,11 +45,7 @@ func (testee *Testee) failed(fail ...int) *Testee {
 	return testee.failWith(f)
 }
 func (testee *Testee) failWith(fail int) *Testee {
-	message := fmt.Sprintf(
-		Scolds[fail],
-		testee.expected,
-		testee.actual,
-	)
+	message := testee.toText(fail)
 	if !testee.dry {
 		fmt.Println(message)
 		testee.t.Fail()
@@ -53,4 +54,22 @@ func (testee *Testee) failWith(fail int) *Testee {
 	testee.Result.OK = false
 	testee.Result.Message = message
 	return testee
+}
+func (testee *Testee) toText(fail int) string {
+	not := ""
+	if testee.not {
+		not = "NOT "
+	}
+	return fmt.Sprintf(
+		Scolds[fail],
+		not,
+		testee.expected,
+		testee.actual,
+	)
+}
+func judge(a, b interface{}, not bool) bool {
+	if not {
+		return a != b
+	}
+	return a == b
 }

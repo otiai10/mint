@@ -3,7 +3,7 @@ package mint
 import "reflect"
 
 func (testee *Testee) ToBe(expected interface{}) *Testee {
-	if testee.actual == expected {
+	if judge(testee.actual, expected, testee.not) {
 		return testee
 	}
 	testee.expected = expected
@@ -12,7 +12,7 @@ func (testee *Testee) ToBe(expected interface{}) *Testee {
 
 // FIXME: Is `string` the base way?
 func (testee *Testee) TypeOf(typeName string) *Testee {
-	if reflect.TypeOf(testee.actual).String() == typeName {
+	if judge(reflect.TypeOf(testee.actual).String(), typeName, testee.not) {
 		return testee
 	}
 	testee.expected = typeName
