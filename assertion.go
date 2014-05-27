@@ -2,19 +2,19 @@ package mint
 
 import "reflect"
 
-func (p *ProxyTestee) ToBe(expected interface{}) {
+func (p *ProxyTestee) ToBe(expected interface{}) *ProxyTestee {
 	if p.actual == expected {
-		return
+		return p
 	}
 	p.expected = expected
-	p.failed()
+	return p.failed()
 }
 
 // FIXME: Is `string` the base way?
-func (p *ProxyTestee) TypeOf(typeName string) {
+func (p *ProxyTestee) TypeOf(typeName string) *ProxyTestee {
 	if reflect.TypeOf(p.actual).String() == typeName {
-		return
+		return p
 	}
 	p.expected = typeName
-	p.failed()
+	return p.failed()
 }
