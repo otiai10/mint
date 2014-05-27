@@ -46,3 +46,8 @@ git clone github.com/otia10/mint
 cd mint
 go test ./...
 ```
+
+# use cases
+Projects bellow use `mint`
+
+- [github.com/otiai10/animapi](https://github.com/otiai10/animapi/blob/master/animapi_test.go)
