@@ -38,10 +38,3 @@ func (p *ProxyTestee) failWith(fail int) {
 	p.t.Fail()
 	os.Exit(1)
 }
-func (p *ProxyTestee) ToBe(expected interface{}) {
-	if p.actual == expected {
-		return
-	}
-	p.expected = expected
-	p.failed()
-}
