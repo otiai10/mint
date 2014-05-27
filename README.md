@@ -9,6 +9,7 @@ The very minimum assertion for Go.
 - Simple syntax
 - Loosely coupled
 - Plain implementaion
+- Under [WTFPL](http://en.wikipedia.org/wiki/WTFPL)
 
 # usage
 ```go
