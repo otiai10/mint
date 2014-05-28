@@ -2,25 +2,13 @@
 
 The very minimum assertion for Go.
 
-[![Build Status](https://travis-ci.org/otiai10/mint.svg?branch=master)](https://travis-ci.org/otiai10/mint)
-
-# features
-
-- Simple syntax
-- Loosely coupled
-- Plain implementaion
-- Under [WTFPL](http://en.wikipedia.org/wiki/WTFPL)
-
-# usage
 ```go
 package your_test
 
 import "your"
 import "testing"
-// Import globally
+
 import . "github.com/otiai10/mint"
-// Or import by package name such as
-// import "github.com/otiai10/mint"
 
 func TestYour_SomeFunc(t *testing.T) {
 
@@ -38,6 +26,15 @@ func TestYour_SomeFunc(t *testing.T) {
     // res.OK == false
 }
 ```
+
+[![Build Status](https://travis-ci.org/otiai10/mint.svg?branch=master)](https://travis-ci.org/otiai10/mint)
+
+# features
+
+- Simple syntax
+- Loosely coupled
+- Plain implementaion
+- Under [WTFPL](http://en.wikipedia.org/wiki/WTFPL)
 
 # contributions
 Behavior Driven Development itself
