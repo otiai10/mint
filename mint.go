@@ -40,7 +40,7 @@ func (testee *Testee) Not() *Testee {
 func (testee *Testee) failed(failure int) *Testee {
 	message := testee.toText(failure)
 	if !testee.dry {
-		fmt.Println(message)
+		testee.t.Errorf(message)
 		testee.t.Fail()
 		os.Exit(1)
 	}
