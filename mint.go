@@ -27,17 +27,26 @@ var (
 	}
 )
 
+// "Blend" provides (blended) *mint.Mint.
+// You can save writing "t" repeatedly.
 func Blend(t *testing.T) *Mint {
 	return &Mint{
 		t,
 	}
 }
-func Expect(t *testing.T, actual interface{}) *Testee {
-	return newTestee(t, actual)
-}
+
+// "*Mint.Expect" provides "*Testee".
+// The blended mint is merely a proxy to instantiate testee.
 func (m *Mint) Expect(actual interface{}) *Testee {
 	return newTestee(m.t, actual)
 }
+
+// "Expect" provides "*mint.Testee".
+// It has assertion methods such as "ToBe".
+func Expect(t *testing.T, actual interface{}) *Testee {
+	return newTestee(t, actual)
+}
+
 func newTestee(t *testing.T, actual interface{}) *Testee {
 	return &Testee{t: t, actual: actual, Result: Result{OK: true}}
 }

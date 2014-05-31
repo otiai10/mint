@@ -4,6 +4,9 @@ import "reflect"
 import "fmt"
 import "os"
 
+// "*Testee.ToBe" can assert the testee to equal the parameter of this func.
+// OS will exit with code 1, when the assertion fail.
+// If you don't want to exit, see "Dry()".
 func (testee *Testee) ToBe(expected interface{}) *Testee {
 	if judge(testee.actual, expected, testee.not) {
 		return testee
@@ -12,7 +15,9 @@ func (testee *Testee) ToBe(expected interface{}) *Testee {
 	return testee.failed(FailBase)
 }
 
-// FIXME: Is `string` the base way?
+// "*Testee.TypeOf" can assert the type of testee to equal the parameter of this func.
+// OS will exit with code 1, when the assertion fail.
+// If you don't want to exit, see "Dry()".
 func (testee *Testee) TypeOf(typeName string) *Testee {
 	if judge(reflect.TypeOf(testee.actual).String(), typeName, testee.not) {
 		return testee
@@ -20,14 +25,20 @@ func (testee *Testee) TypeOf(typeName string) *Testee {
 	testee.expected = typeName
 	return testee.failed(FailType)
 }
-func (testee *Testee) Dry() *Testee {
-	testee.dry = true
-	return testee
-}
+
+// "*Testee.Not" makes following assertion conversed.
 func (testee *Testee) Not() *Testee {
 	testee.not = true
 	return testee
 }
+
+// "*Testee.Dry" makes the testee NOT to call "os.Exit(1)".
+// Use this if you want to fail test in a purpose.
+func (testee *Testee) Dry() *Testee {
+	testee.dry = true
+	return testee
+}
+
 func (testee *Testee) failed(failure int) *Testee {
 	message := testee.toText(failure)
 	if !testee.dry {
