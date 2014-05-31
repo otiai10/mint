@@ -42,3 +42,11 @@ func TestMint_Not_Fail(t *testing.T) {
 	// assert mint by using mint
 	mint.Expect(t, r.OK).Not().ToBe(true)
 }
+
+// Blend is a shorhand to get testee
+func TestMint_Blend(t *testing.T) {
+	m := mint.Blend(t)
+	// assert mint by using mint
+	mint.Expect(t, m).TypeOf("*mint.Mint")
+	mint.Expect(t, m.Expect("foo")).TypeOf("*mint.Testee")
+}
