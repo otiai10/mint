@@ -13,9 +13,7 @@ import . "github.com/otiai10/mint"
 func TestYour_SomeFunc(t *testing.T) {
 
     Expect(t, 1).ToBe(1)
-
     Expect(t, "foo").TypeOf("string")
-
     Expect(t, "exists").Not().ToBe(nil)
 
     Expect(t, your.SomeFunc()).ToBe("My Func!!")
@@ -24,6 +22,11 @@ func TestYour_SomeFunc(t *testing.T) {
     // You can run assertions without os.Exit
     res := Expect(t, "foo").Dry().ToBe("bar").Result
     // res.OK == false
+
+    // Or if you don't want to write `t` repeatedly,
+    m := mint.Blend(t)
+    // you can use blended mint
+    m.Expect(1).ToBe(1)
 }
 ```
 
