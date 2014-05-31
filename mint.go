@@ -4,6 +4,9 @@ import "testing"
 import "fmt"
 import "os"
 
+type Mint struct {
+	t *testing.T
+}
 type Testee struct {
 	t        *testing.T
 	actual   interface{}
@@ -26,8 +29,16 @@ var (
 	}
 )
 
-func Expect(t *testing.T, actual interface{}) *Testee {
+func Blend(t *testing.T) *Mint {
+	return &Mint{
+		t,
+	}
+}
+func newTestee(t *testing.T, actual interface{}) *Testee {
 	return &Testee{t: t, actual: actual, Result: Result{OK: true}}
+}
+func Expect(t *testing.T, actual interface{}) *Testee {
+	return newTestee(t, actual)
 }
 func (testee *Testee) Dry() *Testee {
 	testee.dry = true
@@ -65,4 +76,8 @@ func judge(a, b interface{}, not bool) bool {
 		return a != b
 	}
 	return a == b
+}
+
+func (m *Mint) Expect(actual interface{}) *Testee {
+	return newTestee(m.t, actual)
 }

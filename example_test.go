@@ -22,3 +22,18 @@ func Example_Dry(t *testing.T) {
 		t.Fail()
 	}
 }
+
+// `Blend` provide *mint.Testee.
+// It can save the repeating of `t`.
+func ExampleMint_Expect(t *testing.T) {
+	// get blended mint
+	m := mint.Blend(t)
+
+	yours := 100
+	m.Expect(yours).ToBe(100)
+	result := m.Expect(yours).Dry().ToBe(200).Result
+	if result.OK {
+		t.Fail()
+	}
+	m.Expect(yours).Not().ToBe(200)
+}
