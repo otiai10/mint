@@ -13,7 +13,6 @@ func TestMint_ToBe_Fail(t *testing.T) {
 }
 
 type MyStruct struct{}
-
 func TestMint_TypeOf(t *testing.T) {
 	mint.Expect(t, "foo").TypeOf("string")
 

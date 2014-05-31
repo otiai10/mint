@@ -31,7 +31,6 @@ func ExampleTestee_Dry(t *testing.T) {
 func ExampleBlend(t *testing.T) {
 	// get blended mint
 	m := mint.Blend(t)
-
 	m.Expect(100).ToBe(100)
 	m.Expect(100).Not().ToBe(200)
 }
