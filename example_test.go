@@ -3,37 +3,48 @@ package mint_test
 import "github.com/otiai10/mint"
 import "testing"
 
-// This is example of `Expect` and `ToBe`
-// `ToBe` can assert to eqaal
-func ExampleMint_Expect_ToBe(t *testing.T) {
-	yours := 100
-	expected := 100
-	mint.Expect(t, yours).ToBe(expected)
+// "Expect" provides "*mint.Testee".
+// It has assertion methods such as "ToBe".
+func ExampleExpect(t *testing.T) {
+	mint.Expect(t, 100).ToBe(100)
+	mint.Expect(t, 100).TyepOf("int")
 }
 
-// This is example of `Dry`
-// `Dry` does NOT os.Exit(1)
-// but returns `ProxyTestee` with `Result`
-func ExampleMint_Dry(t *testing.T) {
-	yours := 100
-	expected := 100
-	result := mint.Expect(t, yours).Dry().ToBe(expected).Result
+// "*Testee.ToBe" can assert the testee to equal the parameter of this func.
+// OS will exit with code 1, when the assertion fail.
+// If you don't want to exit, see "Dry()".
+func ExampleTestee_ToBe(t *testing.T) {
+	mint.Expect(t, 100).ToBe(100)
+}
+
+// "*Testee.TypeOf" can assert the type of testee to equal the parameter of this func.
+// OS will exit with code 1, when the assertion fail.
+// If you don't want to exit, see "Dry()".
+func ExampleTestee_TypeOf(t *testing.T) {
+	mint.Expect(t, 100).TypeOf("int")
+}
+
+// "*Testee.Not" makes following assertion conversed.
+func ExampleTestee_Not(t *testing.T) {
+	mint.Expect(t, 100).Not().ToBe(200)
+	mint.Expect(t, 100).Not().TyepOf("string")
+}
+
+// "*Testee.Dry" makes the testee NOT to call "os.Exit(1)".
+// Use this if you want to fail test in a purpose.
+func ExampleTestee_Dry(t *testing.T) {
+	result := mint.Expect(t, 100).Dry().ToBe(100).Result
 	if !result.OK {
 		t.Fail()
 	}
 }
 
-// `Blend` provide *mint.Testee.
-// It can save the repeating of `t`.
-func ExampleMint_Expect(t *testing.T) {
+// "Blend" provides (blended) *mint.Mint.
+// You can save writing "t" repeatedly.
+func ExampleBlend(t *testing.T) {
 	// get blended mint
 	m := mint.Blend(t)
 
-	yours := 100
-	m.Expect(yours).ToBe(100)
-	result := m.Expect(yours).Dry().ToBe(200).Result
-	if result.OK {
-		t.Fail()
-	}
-	m.Expect(yours).Not().ToBe(200)
+	m.Expect(100).ToBe(100)
+	m.Expect(100).Not().ToBe(200)
 }
