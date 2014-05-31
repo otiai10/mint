@@ -1,8 +1,6 @@
 package mint
 
 import "testing"
-import "fmt"
-import "os"
 
 type Mint struct {
 	t *testing.T
@@ -34,50 +32,18 @@ func Blend(t *testing.T) *Mint {
 		t,
 	}
 }
-func newTestee(t *testing.T, actual interface{}) *Testee {
-	return &Testee{t: t, actual: actual, Result: Result{OK: true}}
-}
 func Expect(t *testing.T, actual interface{}) *Testee {
 	return newTestee(t, actual)
 }
-func (testee *Testee) Dry() *Testee {
-	testee.dry = true
-	return testee
+func (m *Mint) Expect(actual interface{}) *Testee {
+	return newTestee(m.t, actual)
 }
-func (testee *Testee) Not() *Testee {
-	testee.not = true
-	return testee
-}
-func (testee *Testee) failed(failure int) *Testee {
-	message := testee.toText(failure)
-	if !testee.dry {
-		testee.t.Errorf(message)
-		testee.t.Fail()
-		os.Exit(1)
-	}
-	testee.Result.OK = false
-	testee.Result.Message = message
-	return testee
-}
-func (testee *Testee) toText(fail int) string {
-	not := ""
-	if testee.not {
-		not = "NOT "
-	}
-	return fmt.Sprintf(
-		Scolds[fail],
-		not,
-		testee.expected,
-		testee.actual,
-	)
+func newTestee(t *testing.T, actual interface{}) *Testee {
+	return &Testee{t: t, actual: actual, Result: Result{OK: true}}
 }
 func judge(a, b interface{}, not bool) bool {
 	if not {
 		return a != b
 	}
 	return a == b
-}
-
-func (m *Mint) Expect(actual interface{}) *Testee {
-	return newTestee(m.t, actual)
 }

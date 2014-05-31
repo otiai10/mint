@@ -7,7 +7,7 @@ import "testing"
 // It has assertion methods such as "ToBe".
 func ExampleExpect(t *testing.T) {
 	mint.Expect(t, 100).ToBe(100)
-	mint.Expect(t, 100).TyepOf("int")
+	mint.Expect(t, 100).TypeOf("int")
 }
 
 // "*Testee.ToBe" can assert the testee to equal the parameter of this func.
@@ -27,7 +27,7 @@ func ExampleTestee_TypeOf(t *testing.T) {
 // "*Testee.Not" makes following assertion conversed.
 func ExampleTestee_Not(t *testing.T) {
 	mint.Expect(t, 100).Not().ToBe(200)
-	mint.Expect(t, 100).Not().TyepOf("string")
+	mint.Expect(t, 100).Not().TypeOf("string")
 }
 
 // "*Testee.Dry" makes the testee NOT to call "os.Exit(1)".
