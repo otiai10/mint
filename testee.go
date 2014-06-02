@@ -42,7 +42,7 @@ func (testee *Testee) Dry() *Testee {
 func (testee *Testee) failed(failure int) *Testee {
 	message := testee.toText(failure)
 	if !testee.dry {
-		fmt.Println(message)
+		fmt.Println(colorize["red"](message))
 		testee.t.Fail()
 		os.Exit(1)
 	}

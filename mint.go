@@ -26,6 +26,15 @@ var (
 		FailType: "Expected %stype `%+v`, but actual `%T`\n",
 	}
 )
+var (
+	redB     = "\033[1;31m"
+	reset    = "\033[0m"
+	colorize = map[string]func(string) string{
+		"red": func(v string) string {
+			return redB + v + reset
+		},
+	}
+)
 
 // "Blend" provides (blended) *mint.Mint.
 // You can save writing "t" repeatedly.
