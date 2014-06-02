@@ -39,11 +39,11 @@ func TestYour_SomeFunc(t *testing.T) {
 - Plain implementaion
 - Under [WTFPL](http://en.wikipedia.org/wiki/WTFPL)
 
-# contributions
+# tests & development
 Behavior Driven Development itself
 ```sh
-git clone github.com/otia10/mint
-cd mint
+go get github.com/otiai10/mint
+cd $GOPATH/src/github.com/otiai10/mint
 go test ./...
 ```
 
