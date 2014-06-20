@@ -3,9 +3,14 @@ package mint
 import "testing"
 import "reflect"
 
+// Mint (mint.Mint) is wrapper for *testing.T
+// blending testing type to omit repeated `t`.
 type Mint struct {
 	t *testing.T
 }
+
+// Testee is holder of interfaces which user want to assert
+// and also has its result.
 type Testee struct {
 	t        *testing.T
 	actual   interface{}
@@ -15,17 +20,20 @@ type Testee struct {
 	deeply   bool
 	Result   Result
 }
+
+// Result provide the results of assertion
+// for `Dry` option.
 type Result struct {
 	OK      bool
 	Message string
 }
 
 var (
-	FailBase = 0
-	FailType = 1
-	Scolds   = map[int]string{
-		FailBase: "Expected %sto be `%+v`, but actual `%+v`\n",
-		FailType: "Expected %stype `%+v`, but actual `%T`\n",
+	failToBe = 0
+	failType = 1
+	scolds   = map[int]string{
+		failToBe: "Expected %sto be `%+v`, but actual `%+v`\n",
+		failType: "Expected %stype `%+v`, but actual `%T`\n",
 	}
 )
 var (
@@ -38,7 +46,7 @@ var (
 	}
 )
 
-// "Blend" provides (blended) *mint.Mint.
+// Blend provides (blended) *mint.Mint.
 // You can save writing "t" repeatedly.
 func Blend(t *testing.T) *Mint {
 	return &Mint{
@@ -46,13 +54,13 @@ func Blend(t *testing.T) *Mint {
 	}
 }
 
-// "*Mint.Expect" provides "*Testee".
+// Expect provides "*Testee".
 // The blended mint is merely a proxy to instantiate testee.
 func (m *Mint) Expect(actual interface{}) *Testee {
 	return newTestee(m.t, actual)
 }
 
-// "Expect" provides "*mint.Testee".
+// Expect provides "*mint.Testee".
 // It has assertion methods such as "ToBe".
 func Expect(t *testing.T, actual interface{}) *Testee {
 	return newTestee(t, actual)
@@ -62,7 +70,7 @@ func newTestee(t *testing.T, actual interface{}) *Testee {
 	return &Testee{t: t, actual: actual, Result: Result{OK: true}}
 }
 func judge(a, b interface{}, not, deeply bool) bool {
-	var comparer func(a, b interface{}) bool = equal
+	comparer := equal
 	if deeply {
 		comparer = deepEqual
 	}

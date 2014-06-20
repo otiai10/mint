@@ -4,7 +4,7 @@ import "reflect"
 import "fmt"
 import "os"
 
-// "*Testee.ToBe" can assert the testee to equal the parameter of this func.
+// ToBe can assert the testee to equal the parameter of this func.
 // OS will exit with code 1, when the assertion fail.
 // If you don't want to exit, see "Dry()".
 func (testee *Testee) ToBe(expected interface{}) *Testee {
@@ -12,10 +12,10 @@ func (testee *Testee) ToBe(expected interface{}) *Testee {
 		return testee
 	}
 	testee.expected = expected
-	return testee.failed(FailBase)
+	return testee.failed(failToBe)
 }
 
-// "*Testee.TypeOf" can assert the type of testee to equal the parameter of this func.
+// TypeOf can assert the type of testee to equal the parameter of this func.
 // OS will exit with code 1, when the assertion fail.
 // If you don't want to exit, see "Dry()".
 func (testee *Testee) TypeOf(typeName string) *Testee {
@@ -23,23 +23,23 @@ func (testee *Testee) TypeOf(typeName string) *Testee {
 		return testee
 	}
 	testee.expected = typeName
-	return testee.failed(FailType)
+	return testee.failed(failType)
 }
 
-// "*Testee.Not" makes following assertion conversed.
+// Not makes following assertion conversed.
 func (testee *Testee) Not() *Testee {
 	testee.not = true
 	return testee
 }
 
-// "*Testee.Dry" makes the testee NOT to call "os.Exit(1)".
+// Dry makes the testee NOT to call "os.Exit(1)".
 // Use this if you want to fail test in a purpose.
 func (testee *Testee) Dry() *Testee {
 	testee.dry = true
 	return testee
 }
 
-// "*Testee.Deeply" makes following assertions use `reflect.DeepEqual`.
+// Deeply makes following assertions use `reflect.DeepEqual`.
 // You had better use this to compare reference type objects.
 func (testee *Testee) Deeply() *Testee {
 	testee.deeply = true
@@ -63,7 +63,7 @@ func (testee *Testee) toText(fail int) string {
 		not = "NOT "
 	}
 	return fmt.Sprintf(
-		Scolds[fail],
+		scolds[fail],
 		not,
 		testee.expected,
 		testee.actual,
