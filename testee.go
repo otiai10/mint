@@ -8,7 +8,7 @@ import "os"
 // OS will exit with code 1, when the assertion fail.
 // If you don't want to exit, see "Dry()".
 func (testee *Testee) ToBe(expected interface{}) *Testee {
-	if judge(testee.actual, expected, testee.not) {
+	if judge(testee.actual, expected, testee.not, testee.deeply) {
 		return testee
 	}
 	testee.expected = expected
@@ -19,7 +19,7 @@ func (testee *Testee) ToBe(expected interface{}) *Testee {
 // OS will exit with code 1, when the assertion fail.
 // If you don't want to exit, see "Dry()".
 func (testee *Testee) TypeOf(typeName string) *Testee {
-	if judge(reflect.TypeOf(testee.actual).String(), typeName, testee.not) {
+	if judge(reflect.TypeOf(testee.actual).String(), typeName, testee.not, testee.deeply) {
 		return testee
 	}
 	testee.expected = typeName
@@ -36,6 +36,13 @@ func (testee *Testee) Not() *Testee {
 // Use this if you want to fail test in a purpose.
 func (testee *Testee) Dry() *Testee {
 	testee.dry = true
+	return testee
+}
+
+// "*Testee.Deeply" makes following assertions use `reflect.DeepEqual`.
+// You had better use this to compare reference type objects.
+func (testee *Testee) Deeply() *Testee {
+	testee.deeply = true
 	return testee
 }
 

@@ -43,6 +43,27 @@ func TestMint_Not_Fail(t *testing.T) {
 	mint.Expect(t, r.OK).Not().ToBe(true)
 }
 
+func TestMint_Deeply(t *testing.T) {
+	map0 := &map[int]string{
+		3:  "three",
+		5:  "five",
+		10: "ten",
+	}
+	map1 := &map[int]string{
+		3:  "three",
+		5:  "five",
+		10: "ten",
+	}
+	// It SHALLOWLY different.
+	r := mint.Expect(t, map0).Dry().ToBe(map1).Result
+	mint.Expect(t, r.OK).ToBe(false)
+	// But it DEEPLY equal.
+	r = mint.Expect(t, map0).Dry().Deeply().ToBe(map1).Result
+	mint.Expect(t, r.OK).ToBe(true)
+
+	mint.Expect(t, map0).Deeply().ToBe(map1)
+}
+
 // Blend is a shorhand to get testee
 func TestMint_Blend(t *testing.T) {
 	m := mint.Blend(t)

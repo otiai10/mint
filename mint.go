@@ -1,6 +1,7 @@
 package mint
 
 import "testing"
+import "reflect"
 
 type Mint struct {
 	t *testing.T
@@ -11,6 +12,7 @@ type Testee struct {
 	expected interface{}
 	dry      bool
 	not      bool
+	deeply   bool
 	Result   Result
 }
 type Result struct {
@@ -59,9 +61,19 @@ func Expect(t *testing.T, actual interface{}) *Testee {
 func newTestee(t *testing.T, actual interface{}) *Testee {
 	return &Testee{t: t, actual: actual, Result: Result{OK: true}}
 }
-func judge(a, b interface{}, not bool) bool {
-	if not {
-		return a != b
+func judge(a, b interface{}, not, deeply bool) bool {
+	var comparer func(a, b interface{}) bool = equal
+	if deeply {
+		comparer = deepEqual
 	}
+	if not {
+		return !comparer(a, b)
+	}
+	return comparer(a, b)
+}
+func equal(a, b interface{}) bool {
 	return a == b
+}
+func deepEqual(a, b interface{}) bool {
+	return reflect.DeepEqual(a, b)
 }
