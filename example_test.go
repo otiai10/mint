@@ -21,6 +21,21 @@ func ExampleTestee_Not(t *testing.T) {
 	mint.Expect(t, 100).Not().TypeOf("string")
 }
 
+func ExampleTestee_Deeply(t *testing.T) {
+	map0 := &map[int]string{
+		3:  "three",
+		5:  "five",
+		10: "ten",
+	}
+	map1 := &map[int]string{
+		3:  "three",
+		5:  "five",
+		10: "ten",
+	}
+	mint.Expect(t, map0).Not().ToBe(map1)
+	mint.Expect(t, map0).Deeply().ToBe(map1)
+}
+
 func ExampleTestee_Dry(t *testing.T) {
 	result := mint.Expect(t, 100).Dry().ToBe(100).Result
 	if !result.OK {

@@ -55,12 +55,8 @@ func TestMint_Deeply(t *testing.T) {
 		10: "ten",
 	}
 	// It SHALLOWLY different.
-	r := mint.Expect(t, map0).Dry().ToBe(map1).Result
-	mint.Expect(t, r.OK).ToBe(false)
+	mint.Expect(t, map0).Not().ToBe(map1)
 	// But it DEEPLY equal.
-	r = mint.Expect(t, map0).Dry().Deeply().ToBe(map1).Result
-	mint.Expect(t, r.OK).ToBe(true)
-
 	mint.Expect(t, map0).Deeply().ToBe(map1)
 }
 
