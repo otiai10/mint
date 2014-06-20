@@ -39,15 +39,12 @@ func TestYour_SomeFunc(t *testing.T) {
 - Plain implementaion
 - Under [WTFPL](http://en.wikipedia.org/wiki/WTFPL)
 
-# tests & development
-Behavior Driven Development itself
-```sh
-go get github.com/otiai10/mint
-cd $GOPATH/src/github.com/otiai10/mint
+# tests
+```
 go test ./...
 ```
 
 # use cases
 Projects bellow use `mint`
 
-- [github.com/otiai10/animapi](https://github.com/otiai10/animapi/blob/master/animapi_test.go)
+- [github.com/otiai10/gosseract](https://github.com/otiai10/gosseract/blob/develop/all_test.go)
