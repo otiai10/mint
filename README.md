@@ -1,4 +1,4 @@
-# mint
+# mint [![Build Status](https://travis-ci.org/otiai10/mint.svg?branch=master)](https://travis-ci.org/otiai10/mint)
 
 The very minimum assertion for Go.
 
@@ -29,8 +29,6 @@ func TestYour_SomeFunc(t *testing.T) {
     m.Expect(1).ToBe(1)
 }
 ```
-
-[![Build Status](https://travis-ci.org/otiai10/mint.svg?branch=master)](https://travis-ci.org/otiai10/mint)
 
 # features
 
