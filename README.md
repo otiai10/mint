@@ -20,7 +20,7 @@ func TestFoo(t *testing.T) {
     Expect(t, foo).ToBe("foobarbuz")
 
     // You can run assertions without os.Exit
-    res := Expect(t, foo).Dry().ToBe("bar").Result
+    res := Expect(t, foo).Dry().ToBe("bar")
     // res.OK() == false
 
     // You can ommit repeated `t`.
