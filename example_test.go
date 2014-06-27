@@ -37,7 +37,7 @@ func ExampleTestee_Deeply(t *testing.T) {
 }
 
 func ExampleTestee_Dry(t *testing.T) {
-	result := mint.Expect(t, 100).Dry().ToBe(100).Result
+	result := mint.Expect(t, 100).Dry().ToBe(100)
 	if !result.OK {
 		t.Fail()
 	}

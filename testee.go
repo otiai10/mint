@@ -7,9 +7,9 @@ import "os"
 // ToBe can assert the testee to equal the parameter of this func.
 // OS will exit with code 1, when the assertion fail.
 // If you don't want to exit, see "Dry()".
-func (testee *Testee) ToBe(expected interface{}) *Testee {
+func (testee *Testee) ToBe(expected interface{}) Result {
 	if judge(testee.actual, expected, testee.not, testee.deeply) {
-		return testee
+		return testee.Result
 	}
 	testee.expected = expected
 	return testee.failed(failToBe)
@@ -18,9 +18,9 @@ func (testee *Testee) ToBe(expected interface{}) *Testee {
 // TypeOf can assert the type of testee to equal the parameter of this func.
 // OS will exit with code 1, when the assertion fail.
 // If you don't want to exit, see "Dry()".
-func (testee *Testee) TypeOf(typeName string) *Testee {
+func (testee *Testee) TypeOf(typeName string) Result {
 	if judge(reflect.TypeOf(testee.actual).String(), typeName, testee.not, testee.deeply) {
-		return testee
+		return testee.Result
 	}
 	testee.expected = typeName
 	return testee.failed(failType)
@@ -46,7 +46,7 @@ func (testee *Testee) Deeply() *Testee {
 	return testee
 }
 
-func (testee *Testee) failed(failure int) *Testee {
+func (testee *Testee) failed(failure int) Result {
 	message := testee.toText(failure)
 	if !testee.dry {
 		fmt.Println(colorize["red"](message))
@@ -55,7 +55,7 @@ func (testee *Testee) failed(failure int) *Testee {
 	}
 	testee.Result.OK = false
 	testee.Result.Message = message
-	return testee
+	return testee.Result
 }
 func (testee *Testee) toText(fail int) string {
 	not := ""
