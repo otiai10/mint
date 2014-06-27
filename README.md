@@ -1,4 +1,4 @@
-# mint [![Build Status](https://travis-ci.org/otiai10/mint.svg?branch=master)](https://travis-ci.org/otiai10/mint)
+# mint [![Build Status](https://travis-ci.org/otiai10/mint.svg?branch=master)](https://travis-ci.org/otiai10/mint) [![GoDoc](https://godoc.org/github.com/otiai10/mint?status.png)](https://godoc.org/github.com/otiai10/mint)
 
 The very minimum assertion for Go.
 
@@ -7,26 +7,25 @@ package your_test
 
 import "your"
 import "testing"
-
 import . "github.com/otiai10/mint"
 
-func TestYour_SomeFunc(t *testing.T) {
+func TestYour(t *testing.T) {
 
-    Expect(t, 1).ToBe(1)
-    Expect(t, "foo").TypeOf("string")
-    Expect(t, "exists").Not().ToBe(nil)
+    foo := your.Foo()
+    Expect(t, foo).ToBe(1234)
+    Expect(t, foo).TypeOf("int")
+    Expect(t, foo).Not().ToBe(nil)
 
-    Expect(t, your.SomeFunc()).ToBe("My Func!!")
     // If assertion failed, exit 1 with message.
+    Expect(t, foo).ToBe("foobarbuz")
 
     // You can run assertions without os.Exit
-    res := Expect(t, "foo").Dry().ToBe("bar").Result
+    res := Expect(t, foo).Dry().ToBe("bar").Result
     // res.OK == false
 
-    // Or if you don't want to write `t` repeatedly,
+    // You can ommit repeated `t`.
     m := mint.Blend(t)
-    // you can use blended mint
-    m.Expect(1).ToBe(1)
+    m.Expect(foo).ToBe(1234)
 }
 ```
 
