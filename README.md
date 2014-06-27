@@ -21,7 +21,7 @@ func TestFoo(t *testing.T) {
 
     // You can run assertions without os.Exit
     res := Expect(t, foo).Dry().ToBe("bar").Result
-    // res.OK == false
+    // res.OK() == false
 
     // You can ommit repeated `t`.
     m := mint.Blend(t)

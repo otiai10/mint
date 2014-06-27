@@ -21,13 +21,6 @@ type Testee struct {
 	Result   Result
 }
 
-// Result provide the results of assertion
-// for `Dry` option.
-type Result struct {
-	OK      bool
-	Message string
-}
-
 var (
 	failToBe = 0
 	failType = 1
@@ -67,7 +60,7 @@ func Expect(t *testing.T, actual interface{}) *Testee {
 }
 
 func newTestee(t *testing.T, actual interface{}) *Testee {
-	return &Testee{t: t, actual: actual, Result: Result{OK: true}}
+	return &Testee{t: t, actual: actual, Result: Result{ok: true}}
 }
 func judge(a, b interface{}, not, deeply bool) bool {
 	comparer := equal

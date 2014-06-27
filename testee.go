@@ -53,8 +53,8 @@ func (testee *Testee) failed(failure int) Result {
 		testee.t.Fail()
 		os.Exit(1)
 	}
-	testee.Result.OK = false
-	testee.Result.Message = message
+	testee.Result.ok = false
+	testee.Result.message = message
 	return testee.Result
 }
 func (testee *Testee) toText(fail int) string {
