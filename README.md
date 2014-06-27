@@ -9,7 +9,7 @@ import "your"
 import "testing"
 import . "github.com/otiai10/mint"
 
-func TestYour(t *testing.T) {
+func TestFoo(t *testing.T) {
 
     foo := your.Foo()
     Expect(t, foo).ToBe(1234)
