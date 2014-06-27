@@ -9,18 +9,6 @@ type Mint struct {
 	t *testing.T
 }
 
-// Testee is holder of interfaces which user want to assert
-// and also has its result.
-type Testee struct {
-	t        *testing.T
-	actual   interface{}
-	expected interface{}
-	dry      bool
-	not      bool
-	deeply   bool
-	Result   Result
-}
-
 var (
 	failToBe = 0
 	failType = 1
@@ -60,7 +48,7 @@ func Expect(t *testing.T, actual interface{}) *Testee {
 }
 
 func newTestee(t *testing.T, actual interface{}) *Testee {
-	return &Testee{t: t, actual: actual, Result: Result{ok: true}}
+	return &Testee{t: t, actual: actual, result: Result{ok: true}}
 }
 func judge(a, b interface{}, not, deeply bool) bool {
 	comparer := equal

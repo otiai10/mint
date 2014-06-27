@@ -1,15 +1,28 @@
 package mint
 
+import "testing"
 import "reflect"
 import "fmt"
 import "os"
+
+// Testee is holder of interfaces which user want to assert
+// and also has its result.
+type Testee struct {
+	t        *testing.T
+	actual   interface{}
+	expected interface{}
+	dry      bool
+	not      bool
+	deeply   bool
+	result   Result
+}
 
 // ToBe can assert the testee to equal the parameter of this func.
 // OS will exit with code 1, when the assertion fail.
 // If you don't want to exit, see "Dry()".
 func (testee *Testee) ToBe(expected interface{}) Result {
 	if judge(testee.actual, expected, testee.not, testee.deeply) {
-		return testee.Result
+		return testee.result
 	}
 	testee.expected = expected
 	return testee.failed(failToBe)
@@ -20,7 +33,7 @@ func (testee *Testee) ToBe(expected interface{}) Result {
 // If you don't want to exit, see "Dry()".
 func (testee *Testee) TypeOf(typeName string) Result {
 	if judge(reflect.TypeOf(testee.actual).String(), typeName, testee.not, testee.deeply) {
-		return testee.Result
+		return testee.result
 	}
 	testee.expected = typeName
 	return testee.failed(failType)
@@ -53,9 +66,9 @@ func (testee *Testee) failed(failure int) Result {
 		testee.t.Fail()
 		os.Exit(1)
 	}
-	testee.Result.ok = false
-	testee.Result.message = message
-	return testee.Result
+	testee.result.ok = false
+	testee.result.message = message
+	return testee.result
 }
 func (testee *Testee) toText(fail int) string {
 	not := ""
