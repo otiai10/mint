@@ -1,7 +1,6 @@
 package mint
 
 import "testing"
-import "reflect"
 
 // Mint (mint.Mint) is wrapper for *testing.T
 // blending testing type to omit repeated `t`.
