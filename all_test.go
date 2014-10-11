@@ -60,6 +60,14 @@ func TestMint_Deeply(t *testing.T) {
 	mint.Expect(t, map0).Deeply().ToBe(map1)
 }
 
+func TestMint_Deeply_slice(t *testing.T) {
+	s1 := []int{1, 2, 3}
+	s2 := []int{4, 5, 6}
+	s3 := []int{1, 2, 3}
+	mint.Expect(t, s1).Not().ToBe(s2)
+	mint.Expect(t, s1).ToBe(s3)
+}
+
 // Blend is a shorhand to get testee
 func TestMint_Blend(t *testing.T) {
 	m := mint.Blend(t)

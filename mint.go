@@ -1,7 +1,6 @@
 package mint
 
 import "testing"
-import "reflect"
 
 // Mint (mint.Mint) is wrapper for *testing.T
 // blending testing type to omit repeated `t`.
@@ -51,18 +50,9 @@ func newTestee(t *testing.T, actual interface{}) *Testee {
 	return &Testee{t: t, actual: actual, result: Result{ok: true}}
 }
 func judge(a, b interface{}, not, deeply bool) bool {
-	comparer := equal
-	if deeply {
-		comparer = deepEqual
-	}
+	comparer := getComparer(a, b, deeply)
 	if not {
-		return !comparer(a, b)
+		return !comparer.Compare(a, b)
 	}
-	return comparer(a, b)
-}
-func equal(a, b interface{}) bool {
-	return a == b
-}
-func deepEqual(a, b interface{}) bool {
-	return reflect.DeepEqual(a, b)
+	return comparer.Compare(a, b)
 }
