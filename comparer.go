@@ -6,8 +6,11 @@ func getComparer(a, b interface{}, deeply bool) Comparer {
 	if deeply {
 		return deepComparer{}
 	}
-	if reflect.ValueOf(a).Kind() == reflect.Slice {
+	switch reflect.ValueOf(a).Kind() {
+	case reflect.Slice:
 		return sliceComparer{}
+	case reflect.Map:
+		return mapComparer{}
 	}
 	return defaultComparer{}
 }
