@@ -4,6 +4,8 @@ import "testing"
 import "reflect"
 import "fmt"
 import "os"
+import "runtime"
+import "path/filepath"
 
 // Testee is holder of interfaces which user want to assert
 // and also has its result.
@@ -75,8 +77,10 @@ func (testee *Testee) toText(fail int) string {
 	if testee.not {
 		not = "NOT "
 	}
+	_, file, line, _ := runtime.Caller(3)
 	return fmt.Sprintf(
 		scolds[fail],
+		filepath.Base(file), line,
 		not,
 		testee.expected,
 		testee.actual,
