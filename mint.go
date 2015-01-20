@@ -12,8 +12,8 @@ var (
 	failToBe = 0
 	failType = 1
 	scolds   = map[int]string{
-		failToBe: "Expected %sto be `%+v`, but actual `%+v`",
-		failType: "Expected %stype `%+v`, but actual `%T`",
+		failToBe: "Expected %sto be\t`%+v`\nBut actual\t`%+v`",
+		failType: "Expected %stype\t`%+v`\nBut actual\t`%T`",
 	}
 )
 var (
