@@ -1,4 +1,4 @@
-# mint [![Build Status](https://travis-ci.org/otiai10/mint.svg?branch=master)](https://travis-ci.org/otiai10/mint) [![GoDoc](https://godoc.org/github.com/otiai10/mint?status.png)](https://godoc.org/github.com/otiai10/mint)
+# mint [![Build Status](https://travis-ci.org/otiai10/mint.svg?branch=master)](https://travis-ci.org/otiai10/mint) [![GoDoc](https://godoc.org/github.com/otiai10/mint?status.png)](https://godoc.org/github.com/otiai10/mint) [![Build Status](https://drone.io/github.com/otiai10/mint/status.png)](https://drone.io/github.com/otiai10/mint/latest)
 
 The very minimum assertion for Go.
 
