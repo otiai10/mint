@@ -3,7 +3,6 @@ package mint
 import "testing"
 import "reflect"
 import "fmt"
-import "os"
 import "runtime"
 import "path/filepath"
 
@@ -47,7 +46,7 @@ func (testee *Testee) Not() *Testee {
 	return testee
 }
 
-// Dry makes the testee NOT to call "os.Exit(1)".
+// Dry makes the testee NOT to call "Fail()".
 // Use this if you want to fail test in a purpose.
 func (testee *Testee) Dry() *Testee {
 	testee.dry = true
@@ -63,13 +62,12 @@ func (testee *Testee) Deeply() *Testee {
 
 func (testee *Testee) failed(failure int) Result {
 	message := testee.toText(failure)
+	testee.result.ok = false
+	testee.result.message = message
 	if !testee.dry {
 		fmt.Println(colorize["red"](message))
 		testee.t.Fail()
-		os.Exit(1)
 	}
-	testee.result.ok = false
-	testee.result.message = message
 	return testee.result
 }
 func (testee *Testee) toText(fail int) string {
