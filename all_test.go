@@ -85,3 +85,12 @@ func TestMint_Blend(t *testing.T) {
 	mint.Expect(t, m).TypeOf("*mint.Mint")
 	mint.Expect(t, m.Expect("foo")).TypeOf("*mint.Testee")
 }
+
+// Because
+func TestBecause(t *testing.T) {
+	mint.Because(t, "`Because` should print context.", func(t *testing.T) {
+		mint.Expect(t, true).ToBe(true)
+		res := mint.Expect(t, false).Dry().ToBe(true)
+		mint.Expect(t, res.OK()).ToBe(false)
+	})
+}
