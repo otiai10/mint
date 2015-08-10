@@ -29,6 +29,17 @@ func (testee *Testee) ToBe(expected interface{}) Result {
 	return testee.failed(failToBe)
 }
 
+// In can assert the testee is in given array.
+func (testee *Testee) In(expecteds ...interface{}) Result {
+	for _, expected := range expecteds {
+		if judge(testee.actual, expected, testee.not, testee.deeply) {
+			return testee.result
+		}
+	}
+	testee.expected = expecteds
+	return testee.failed(failIn)
+}
+
 // TypeOf can assert the type of testee to equal the parameter of this func.
 // OS will exit with code 1, when the assertion fail.
 // If you don't want to exit, see "Dry()".

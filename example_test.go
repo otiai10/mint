@@ -16,6 +16,10 @@ func ExampleTestee_TypeOf(t *testing.T) {
 	mint.Expect(t, 100).TypeOf("int")
 }
 
+func ExampleTestee_In(t *testing.T) {
+	mint.Expect(t, 100).In(10, 100, 1000)
+}
+
 func ExampleTestee_Not(t *testing.T) {
 	mint.Expect(t, 100).Not().ToBe(200)
 	mint.Expect(t, 100).Not().TypeOf("string")

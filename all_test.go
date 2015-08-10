@@ -12,6 +12,14 @@ func TestMint_ToBe_Fail(t *testing.T) {
 	mint.Expect(t, r.OK()).ToBe(false)
 }
 
+func TestTestee_In(t *testing.T) {
+	r := mint.Expect(t, 100).Dry().In(10, 100, 1000)
+	mint.Expect(t, r.OK()).ToBe(true)
+
+	r = mint.Expect(t, 999).Dry().In(10, 100, 1000)
+	mint.Expect(t, r.OK()).ToBe(false)
+}
+
 type MyStruct struct{}
 
 func TestMint_TypeOf(t *testing.T) {
@@ -31,7 +39,7 @@ func TestMint_TypeOf_Fail(t *testing.T) {
 	// assert mint by using mint
 	mint.Expect(t, r.OK()).ToBe(false)
 	mint.Expect(t, r.NG()).ToBe(true)
-	mint.Expect(t, r.Message()).ToBe("all_test.go at line 30\n\tExpected type\t`foo.Bar`\n\tBut actual\t`mint_test.MyStruct`")
+	mint.Expect(t, r.Message()).ToBe("all_test.go at line 38\n\tExpected type\t`foo.Bar`\n\tBut actual\t`mint_test.MyStruct`")
 }
 
 func TestMint_Not(t *testing.T) {
