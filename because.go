@@ -1,12 +1,9 @@
 package mint
 
-import (
-	"fmt"
-	"testing"
-)
+import "testing"
 
 // Because is context printer.
 func Because(t *testing.T, context string, wrapper func(*testing.T)) {
-	fmt.Print(context + "\n")
+	t.Log(context + "\n")
 	wrapper(t)
 }
