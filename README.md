@@ -34,7 +34,6 @@ func TestFoo(t *testing.T) {
 - Simple syntax
 - Loosely coupled
 - Plain implementaion
-- Under [WTFPL](http://en.wikipedia.org/wiki/WTFPL)
 
 # tests
 ```
