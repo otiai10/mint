@@ -1,6 +1,9 @@
 package mint
 
-import "testing"
+import (
+	"os"
+	"testing"
+)
 
 // Mint (mint.Mint) is wrapper for *testing.T
 // blending testing type to omit repeated `t`.
@@ -49,7 +52,15 @@ func Expect(t *testing.T, actual interface{}) *Testee {
 }
 
 func newTestee(t *testing.T, actual interface{}) *Testee {
-	return &Testee{t: t, actual: actual, result: Result{ok: true}}
+	return &Testee{t: t, actual: actual, verbose: isVerbose(os.Args), result: Result{ok: true}}
+}
+func isVerbose(flags []string) bool {
+	for _, f := range flags {
+		if f == "-test.v=true" {
+			return true
+		}
+	}
+	return false
 }
 func judge(a, b interface{}, not, deeply bool) bool {
 	comparer := getComparer(a, b, deeply)

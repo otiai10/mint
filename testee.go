@@ -16,6 +16,7 @@ type Testee struct {
 	not      bool
 	deeply   bool
 	result   Result
+	verbose  bool
 }
 
 // ToBe can assert the testee to equal the parameter of this func.
@@ -81,6 +82,7 @@ func (testee *Testee) failed(failure int) Result {
 	}
 	return testee.result
 }
+
 func (testee *Testee) toText(fail int) string {
 	not := ""
 	if testee.not {
@@ -94,4 +96,14 @@ func (testee *Testee) toText(fail int) string {
 		testee.expected,
 		testee.actual,
 	)
+}
+
+// Log only output if -v flag is given.
+// This is because the standard "t.Testing.Log" method decorates
+// its caller: runtime.Caller(3) automatically.
+func (testee *Testee) Log(args ...interface{}) {
+	if !testee.verbose {
+		return
+	}
+	fmt.Print(args...)
 }
