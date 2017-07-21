@@ -102,3 +102,12 @@ func TestBecause(t *testing.T) {
 		mint.Expect(t, res.OK()).ToBe(false)
 	})
 }
+
+// When
+func TestWhen(t *testing.T) {
+	mint.When(t, "`When` should print context.", func(t *testing.T) {
+		mint.Expect(t, true).ToBe(true)
+		res := mint.Expect(t, false).Dry().ToBe(true)
+		mint.Expect(t, res.OK()).ToBe(false)
+	})
+}
