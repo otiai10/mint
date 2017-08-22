@@ -1,13 +1,17 @@
-# mint [![Build Status](https://travis-ci.org/otiai10/mint.svg?branch=master)](https://travis-ci.org/otiai10/mint) [![GoDoc](https://godoc.org/github.com/otiai10/mint?status.png)](https://godoc.org/github.com/otiai10/mint) [![Build Status](https://drone.io/github.com/otiai10/mint/status.png)](https://drone.io/github.com/otiai10/mint/latest)
+# mint
+
+[![Build Status](https://travis-ci.org/otiai10/mint.svg?branch=master)](https://travis-ci.org/otiai10/mint) [![GoDoc](https://godoc.org/github.com/otiai10/mint?status.png)](https://godoc.org/github.com/otiai10/mint)
 
 The very minimum assertion for Go.
 
 ```go
 package your_test
 
-import "your"
-import "testing"
-import . "github.com/otiai10/mint"
+import (
+    "testing"
+    "pkg/your"
+    . "github.com/otiai10/mint"
+)
 
 func TestFoo(t *testing.T) {
 
@@ -41,6 +45,8 @@ go test ./...
 ```
 
 # use cases
+
 Projects bellow use `mint`
 
 - [github.com/otiai10/gosseract](https://github.com/otiai10/gosseract/blob/develop/all_test.go)
+- [github.com/otiai10/marmoset](https://github.com/otiai10/marmoset/blob/master/all_test.go#L168-L190)
