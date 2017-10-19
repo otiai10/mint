@@ -27,7 +27,7 @@ func TestFoo(t *testing.T) {
     res := Expect(t, foo).Dry().ToBe("bar")
     // res.OK() == false
 
-    // You can ommit repeated `t`.
+    // You can omit repeated `t`.
     m := mint.Blend(t)
     m.Expect(foo).ToBe(1234)
 }
@@ -37,7 +37,7 @@ func TestFoo(t *testing.T) {
 
 - Simple syntax
 - Loosely coupled
-- Plain implementaion
+- Plain implementation
 
 # tests
 ```

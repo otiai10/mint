@@ -1,9 +1,14 @@
 package mint
 
-import "testing"
-import "reflect"
+import (
+	"reflect"
+	"regexp"
+	"runtime"
+	"testing"
+)
+
 import "fmt"
-import "runtime"
+
 import "path/filepath"
 
 // Testee is holder of interfaces which user want to assert
@@ -28,6 +33,20 @@ func (testee *Testee) ToBe(expected interface{}) Result {
 	}
 	testee.expected = expected
 	return testee.failed(failToBe)
+}
+
+// Match can assert the testee to match with specified regular expression.
+// It uses `regexp.MustCompile`, it's due to caller to make sure it's valid regexp.
+// OS will exit with code 1, when the assertion fail.
+// If you don't want to exit, see "Dry()".
+func (testee *Testee) Match(expression string) Result {
+	exp := regexp.MustCompile(expression)
+	matched := exp.MatchString(fmt.Sprintf("%v", testee.actual))
+	if judge(matched, true, testee.not, testee.deeply) {
+		return testee.result
+	}
+	testee.expected = expression
+	return testee.failed(failToMatch)
 }
 
 // In can assert the testee is in given array.

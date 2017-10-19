@@ -12,6 +12,10 @@ func ExampleTestee_ToBe(t *testing.T) {
 	mint.Expect(t, 100).ToBe(100)
 }
 
+func ExampleTestee_Match(t *testing.T) {
+	mint.Expect(t, "3.05.00dev").Match("[0-9].[0-9]{2}(.[0-9a-z]+)?")
+}
+
 func ExampleTestee_TypeOf(t *testing.T) {
 	mint.Expect(t, 100).TypeOf("int")
 }

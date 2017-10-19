@@ -12,13 +12,15 @@ type Mint struct {
 }
 
 var (
-	failToBe = 0
-	failType = 1
-	failIn   = 2
-	scolds   = map[int]string{
-		failToBe: "%s at line %d\n\tExpected %sto be\t`%+v`\n\tBut actual\t`%+v`",
-		failType: "%s at line %d\n\tExpected %stype\t`%+v`\n\tBut actual\t`%T`",
-		failIn:   "%s at line %d\n\tExpected %sis in\t`%v`\n\tbut it's not",
+	failToBe    = 0
+	failType    = 1
+	failIn      = 2
+	failToMatch = 3
+	scolds      = map[int]string{
+		failToBe:    "%s at line %d\n\tExpected %sto be\t`%+v`\n\tBut actual\t`%+v`",
+		failType:    "%s at line %d\n\tExpected %stype\t`%+v`\n\tBut actual\t`%T`",
+		failIn:      "%s at line %d\n\tExpected %sis in\t`%v`\n\tbut it's not",
+		failToMatch: "%s at line %d\n\tExpected %v to match\t`%s`\n\tBut actual\t`%+v`",
 	}
 )
 var (
