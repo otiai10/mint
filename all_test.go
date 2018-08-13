@@ -1,7 +1,12 @@
 package mint_test
 
-import "testing"
-import "github.com/otiai10/mint"
+import (
+	"log"
+	"os"
+	"testing"
+
+	"github.com/otiai10/mint"
+)
 
 func TestMint_ToBe(t *testing.T) {
 	mint.Expect(t, 1).ToBe(1)
@@ -44,7 +49,7 @@ func TestMint_TypeOf_Fail(t *testing.T) {
 	// assert mint by using mint
 	mint.Expect(t, r.OK()).ToBe(false)
 	mint.Expect(t, r.NG()).ToBe(true)
-	mint.Expect(t, r.Message()).ToBe("all_test.go at line 43\n\tExpected type\t`foo.Bar`\n\tBut actual\t`mint_test.MyStruct`")
+	mint.Expect(t, r.Message()).ToBe("all_test.go at line 48\n\tExpected type\t`foo.Bar`\n\tBut actual\t`mint_test.MyStruct`")
 }
 
 func TestMint_Not(t *testing.T) {
@@ -115,4 +120,15 @@ func TestWhen(t *testing.T) {
 		res := mint.Expect(t, false).Dry().ToBe(true)
 		mint.Expect(t, res.OK()).ToBe(false)
 	})
+}
+
+// Exit
+func TestExit(t *testing.T) {
+	mint.Expect(t, func() {
+		log.Fatalln("aaaa")
+	}).Exit(1)
+
+	mint.Expect(t, func() {
+		os.Exit(1)
+	}).Not().Exit(0)
 }

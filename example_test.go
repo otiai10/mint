@@ -1,7 +1,11 @@
 package mint_test
 
-import "github.com/otiai10/mint"
-import "testing"
+import (
+	"os"
+	"testing"
+
+	"github.com/otiai10/mint"
+)
 
 func ExampleExpect(t *testing.T) {
 	mint.Expect(t, 100).ToBe(100)
@@ -56,4 +60,11 @@ func ExampleBlend(t *testing.T) {
 	m := mint.Blend(t)
 	m.Expect(100).ToBe(100)
 	m.Expect(100).Not().ToBe(200)
+}
+
+func ExampleExit(t *testing.T) {
+	unsuccessful := func() {
+		os.Exit(1)
+	}
+	mint.Expect(t, unsuccessful).Not().Exit(0)
 }
