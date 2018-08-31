@@ -3,7 +3,7 @@ package mint
 import (
 	"os"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 )
 
 // Exit ...
