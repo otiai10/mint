@@ -21,6 +21,7 @@ func TestFoo(t *testing.T) {
     Expect(t, foo).ToBe(1234)
     Expect(t, foo).TypeOf("int")
     Expect(t, foo).Not().ToBe(nil)
+    Expect(t, func() { yourFunc() }).Exit(1)
 
     // If assertion failed, exit 1 with message.
     Expect(t, foo).ToBe("foobarbuz")
