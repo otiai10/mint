@@ -1,9 +1,10 @@
 package mint_test
 
 import (
-	"log"
-	"os"
+	"fmt"
 	"testing"
+
+	"github.com/otiai10/curr"
 
 	"github.com/otiai10/mint"
 )
@@ -45,11 +46,12 @@ func TestMint_TypeOf_Fail(t *testing.T) {
 	mint.Expect(t, r.NG()).ToBe(true)
 
 	bar := MyStruct{}
+	line := curr.Line() + 1
 	r = mint.Expect(t, bar).Dry().TypeOf("foo.Bar")
 	// assert mint by using mint
 	mint.Expect(t, r.OK()).ToBe(false)
 	mint.Expect(t, r.NG()).ToBe(true)
-	mint.Expect(t, r.Message()).ToBe("all_test.go at line 48\n\tExpected type\t`foo.Bar`\n\tBut actual\t`mint_test.MyStruct`")
+	mint.Expect(t, r.Message()).ToBe(fmt.Sprintf("all_test.go at line %d\n\tExpected type\t`foo.Bar`\n\tBut actual\t`mint_test.MyStruct`", line))
 }
 
 func TestMint_Not(t *testing.T) {
