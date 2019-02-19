@@ -123,14 +123,3 @@ func TestWhen(t *testing.T) {
 		mint.Expect(t, res.OK()).ToBe(false)
 	})
 }
-
-// Exit
-func TestExit(t *testing.T) {
-	mint.Expect(t, func() {
-		log.Fatalln("aaaa")
-	}).Exit(1)
-
-	mint.Expect(t, func() {
-		os.Exit(1)
-	}).Not().Exit(0)
-}
