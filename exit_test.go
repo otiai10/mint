@@ -3,7 +3,6 @@
 package mint_test
 
 import (
-	"log"
 	"os"
 	"testing"
 
@@ -13,8 +12,8 @@ import (
 // Exit
 func TestExit(t *testing.T) {
 	mint.Expect(t, func() {
-		log.Fatalln("intentionally failed")
-	}).Exit(1)
+		os.Exit(999999)
+	}).Exit(999999)
 
 	mint.Expect(t, func() {
 		os.Exit(1)
