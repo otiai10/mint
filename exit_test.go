@@ -18,4 +18,9 @@ func TestExit(t *testing.T) {
 	mint.Expect(t, func() {
 		os.Exit(1)
 	}).Not().Exit(0)
+
+	r := mint.Expect(t, func() {
+		os.Exit(0)
+	}).Dry().Exit(1)
+	mint.Expect(t, r.OK()).ToBe(false)
 }
