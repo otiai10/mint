@@ -51,5 +51,5 @@ go test ./...
 
 Projects bellow use `mint`
 
-- [github.com/otiai10/gosseract](https://github.com/otiai10/gosseract/blob/develop/all_test.go)
+- [github.com/otiai10/gosseract](https://github.com/otiai10/gosseract/blob/master/all_test.go)
 - [github.com/otiai10/marmoset](https://github.com/otiai10/marmoset/blob/master/all_test.go#L168-L190)
