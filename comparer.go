@@ -1,6 +1,9 @@
 package mint
 
-import "reflect"
+import (
+	"fmt"
+	"reflect"
+)
 
 func getComparer(a, b interface{}, deeply bool) Comparer {
 	if deeply {
@@ -11,6 +14,9 @@ func getComparer(a, b interface{}, deeply bool) Comparer {
 		return sliceComparer{}
 	case reflect.Map:
 		return mapComparer{}
+	}
+	if b == nil {
+		return nilComparer{}
 	}
 	return defaultComparer{}
 }
@@ -37,4 +43,11 @@ type mapComparer struct {
 
 type sliceComparer struct {
 	deepComparer
+}
+
+type nilComparer struct {
+}
+
+func (c nilComparer) Compare(a, _ interface{}) bool {
+	return fmt.Sprintf("%v", a) == fmt.Sprintf("%v", nil)
 }

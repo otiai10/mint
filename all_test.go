@@ -9,8 +9,15 @@ import (
 	"github.com/otiai10/mint"
 )
 
-func TestMint_ToBe(t *testing.T) {
+func TestMint_ToBeX(t *testing.T) {
 	mint.Expect(t, 1).ToBe(1)
+	type Foo struct{}
+	var foo *Foo
+	mint.Expect(t, foo).ToBe(nil)
+	foo = &Foo{}
+	mint.Expect(t, foo).Not().ToBe(nil)
+	foo = nil
+	mint.Expect(t, foo).Not().ToBe(100)
 }
 func TestMint_ToBe_Fail(t *testing.T) {
 	r := mint.Expect(t, 2).Dry().ToBe(1)
