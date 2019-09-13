@@ -11,6 +11,7 @@ import (
 
 // Exit
 func TestExit(t *testing.T) {
+	t.Skip("mint.Testee.Exit is temporarily deprecated.")
 	mint.Expect(t, func() {
 		os.Exit(999999)
 	}).Exit(999999)
