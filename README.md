@@ -3,6 +3,7 @@
 [![Go](https://github.com/otiai10/mint/actions/workflows/go.yml/badge.svg)](https://github.com/otiai10/mint/actions/workflows/go.yml)
 [![codecov](https://codecov.io/gh/otiai10/mint/branch/master/graph/badge.svg)](https://codecov.io/gh/otiai10/mint)
 [![GoDoc](https://godoc.org/github.com/otiai10/mint?status.png)](https://godoc.org/github.com/otiai10/mint)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fotiai10%2Fmint.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fotiai10%2Fmint?ref=badge_shield)
 
 The very minimum assertion for Go.
 
@@ -53,3 +54,7 @@ Projects bellow use `mint`
 
 - [github.com/otiai10/gosseract](https://github.com/otiai10/gosseract/blob/master/all_test.go)
 - [github.com/otiai10/marmoset](https://github.com/otiai10/marmoset/blob/master/all_test.go#L168-L190)
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fotiai10%2Fmint.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fotiai10%2Fmint?ref=badge_large)
