@@ -1,6 +1,7 @@
 package mint_test
 
 import (
+	"encoding/json"
 	"fmt"
 	"testing"
 
@@ -129,4 +130,22 @@ func TestWhen(t *testing.T) {
 		res := mint.Expect(t, false).Dry().ToBe(true)
 		mint.Expect(t, res.OK()).ToBe(false)
 	})
+}
+
+func TestHTTPClientMock(t *testing.T) {
+	type FooAPIClient struct {
+		mint.HTTPClientMock
+	}
+	foo := new(FooAPIClient)
+	foo.ResponseBody = `{"scope": [100, 200]}`
+
+	res, err, ok := foo.Handle()
+	mint.Expect(t, ok).ToBe(true)
+	mint.Expect(t, err).ToBe(nil)
+	mint.Expect(t, res).TypeOf("*http.Response")
+	defer res.Body.Close()
+	body := map[string][]int{}
+	err = json.NewDecoder(res.Body).Decode(&body)
+	mint.Expect(t, err).ToBe(nil)
+	mint.Expect(t, body["scope"]).Deeply().ToBe([]int{100, 200})
 }
