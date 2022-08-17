@@ -18,7 +18,7 @@ type Testee struct {
 	dry      bool
 	not      bool
 	deeply   bool
-	result   Result
+	result   MintResult
 	required bool
 	verbose  bool
 }
@@ -26,7 +26,7 @@ type Testee struct {
 // ToBe can assert the testee to equal the parameter of this func.
 // OS will exit with code 1, when the assertion fail.
 // If you don't want to exit, see "Dry()".
-func (testee *Testee) ToBe(expected interface{}) Result {
+func (testee *Testee) ToBe(expected interface{}) MintResult {
 	if judge(testee.actual, expected, testee.not, testee.deeply) {
 		return testee.result
 	}
@@ -38,7 +38,7 @@ func (testee *Testee) ToBe(expected interface{}) Result {
 // It uses `regexp.MustCompile`, it's due to caller to make sure it's valid regexp.
 // OS will exit with code 1, when the assertion fail.
 // If you don't want to exit, see "Dry()".
-func (testee *Testee) Match(expression string) Result {
+func (testee *Testee) Match(expression string) MintResult {
 	exp := regexp.MustCompile(expression)
 	matched := exp.MatchString(fmt.Sprintf("%v", testee.actual))
 	if judge(matched, true, testee.not, testee.deeply) {
@@ -49,7 +49,7 @@ func (testee *Testee) Match(expression string) Result {
 }
 
 // In can assert the testee is in given array.
-func (testee *Testee) In(expecteds ...interface{}) Result {
+func (testee *Testee) In(expecteds ...interface{}) MintResult {
 	for _, expected := range expecteds {
 		if judge(testee.actual, expected, testee.not, testee.deeply) {
 			return testee.result
@@ -62,7 +62,7 @@ func (testee *Testee) In(expecteds ...interface{}) Result {
 // TypeOf can assert the type of testee to equal the parameter of this func.
 // OS will exit with code 1, when the assertion fail.
 // If you don't want to exit, see "Dry()".
-func (testee *Testee) TypeOf(typeName string) Result {
+func (testee *Testee) TypeOf(typeName string) MintResult {
 	if judge(reflect.TypeOf(testee.actual).String(), typeName, testee.not, testee.deeply) {
 		return testee.result
 	}
@@ -90,7 +90,7 @@ func (testee *Testee) Deeply() *Testee {
 	return testee
 }
 
-func (testee *Testee) failed(failure int) Result {
+func (testee *Testee) failed(failure int) MintResult {
 	message := testee.toText(failure)
 	testee.result.ok = false
 	testee.result.message = message

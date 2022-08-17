@@ -56,7 +56,7 @@ func Expect(t *testing.T, actual interface{}) *Testee {
 }
 
 func expect(t *testing.T, actual interface{}) *Testee {
-	return &Testee{t: t, actual: actual, verbose: isVerbose(os.Args), result: Result{ok: true}}
+	return &Testee{t: t, actual: actual, verbose: isVerbose(os.Args), result: MintResult{ok: true}}
 }
 
 // Require provides "*mint.Testee",
@@ -66,7 +66,7 @@ func Require(t *testing.T, actual interface{}) *Testee {
 }
 
 func require(t *testing.T, actual interface{}) *Testee {
-	return &Testee{t: t, actual: actual, verbose: isVerbose(os.Args), required: true, result: Result{ok: true}}
+	return &Testee{t: t, actual: actual, verbose: isVerbose(os.Args), required: true, result: MintResult{ok: true}}
 }
 
 func isVerbose(flags []string) bool {

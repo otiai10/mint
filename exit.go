@@ -1,3 +1,4 @@
+//go:build !freebsd
 // +build !freebsd
 
 package mint
@@ -13,7 +14,7 @@ package mint
 //        See https://github.com/otiai10/copy/issues/12 as well
 
 // Exit ...
-func (testee *Testee) Exit(expectedCode int) Result {
+func (testee *Testee) Exit(expectedCode int) MintResult {
 
 	panic("`mint.Testee.Exit` method is temporarily deprecated.")
 

@@ -1,23 +1,23 @@
 package mint
 
-// Result provide the results of assertion
+// MintResult provide the results of assertion
 // for `Dry` option.
-type Result struct {
+type MintResult struct {
 	ok      bool
 	message string
 }
 
 // OK returns whether result is ok or not.
-func (r Result) OK() bool {
+func (r MintResult) OK() bool {
 	return r.ok
 }
 
 // NG is the opposite alias for OK().
-func (r Result) NG() bool {
+func (r MintResult) NG() bool {
 	return !r.ok
 }
 
 // Message returns failure message.
-func (r Result) Message() string {
+func (r MintResult) Message() string {
 	return r.message
 }
