@@ -149,3 +149,13 @@ func TestHTTPClientMock(t *testing.T) {
 	mint.Expect(t, err).ToBe(nil)
 	mint.Expect(t, body["scope"]).Deeply().ToBe([]int{100, 200})
 }
+
+func TestRequire(t *testing.T) {
+	t.Skip("TODO: Make sure it exits immediately when with `Require`")
+	// ok := t.Run("TestRequire", func(u *testing.T) {
+	// 	actual := 100
+	// 	mint.Require(u, actual).ToBe(200)
+	// 	panic("This panic should not be reached because `Require` stops executing this goroutine.")
+	// })
+	// mint.Expect(t, ok).ToBe(false)
+}

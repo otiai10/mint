@@ -46,18 +46,29 @@ func Blend(t *testing.T) *Mint {
 // Expect provides "*Testee".
 // The blended mint is merely a proxy to instantiate testee.
 func (m *Mint) Expect(actual interface{}) *Testee {
-	return newTestee(m.t, actual)
+	return expect(m.t, actual)
 }
 
 // Expect provides "*mint.Testee".
 // It has assertion methods such as "ToBe".
 func Expect(t *testing.T, actual interface{}) *Testee {
-	return newTestee(t, actual)
+	return expect(t, actual)
 }
 
-func newTestee(t *testing.T, actual interface{}) *Testee {
+func expect(t *testing.T, actual interface{}) *Testee {
 	return &Testee{t: t, actual: actual, verbose: isVerbose(os.Args), result: Result{ok: true}}
 }
+
+// Require provides "*mint.Testee",
+// which stops execution of goroutine when the assertion failed.
+func Require(t *testing.T, actual interface{}) *Testee {
+	return require(t, actual)
+}
+
+func require(t *testing.T, actual interface{}) *Testee {
+	return &Testee{t: t, actual: actual, verbose: isVerbose(os.Args), required: true, result: Result{ok: true}}
+}
+
 func isVerbose(flags []string) bool {
 	for _, f := range flags {
 		if f == "-test.v=true" {

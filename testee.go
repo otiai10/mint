@@ -1,15 +1,13 @@
 package mint
 
 import (
+	"fmt"
+	"path/filepath"
 	"reflect"
 	"regexp"
 	"runtime"
 	"testing"
 )
-
-import "fmt"
-
-import "path/filepath"
 
 // Testee is holder of interfaces which user want to assert
 // and also has its result.
@@ -21,6 +19,7 @@ type Testee struct {
 	not      bool
 	deeply   bool
 	result   Result
+	required bool
 	verbose  bool
 }
 
@@ -97,7 +96,11 @@ func (testee *Testee) failed(failure int) Result {
 	testee.result.message = message
 	if !testee.dry {
 		fmt.Println(colorize["red"](message))
-		testee.t.Fail()
+		if testee.required {
+			testee.t.FailNow()
+		} else {
+			testee.t.Fail()
+		}
 	}
 	return testee.result
 }
