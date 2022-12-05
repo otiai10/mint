@@ -1,9 +1,10 @@
+//go:build freebsd
 // +build freebsd
 
 package mint
 
 // Exit ...
-func (testee *Testee) Exit(expectedCode int) Result {
+func (testee *Testee) Exit(expectedCode int) MintResult {
 	panic("Exit method can NOT be used on FreeBSD, for now.")
-	return Result{ok: false}
+	return MintResult{ok: false}
 }
