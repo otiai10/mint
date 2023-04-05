@@ -2,7 +2,9 @@
 
 [![Go](https://github.com/otiai10/mint/actions/workflows/go.yml/badge.svg)](https://github.com/otiai10/mint/actions/workflows/go.yml)
 [![codecov](https://codecov.io/gh/otiai10/mint/branch/master/graph/badge.svg)](https://codecov.io/gh/otiai10/mint)
+[![Go Report Card](https://goreportcard.com/badge/github.com/otiai10/mint)](https://goreportcard.com/report/github.com/otiai10/mint)
 [![GoDoc](https://godoc.org/github.com/otiai10/mint?status.png)](https://godoc.org/github.com/otiai10/mint)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/otiai10/mint?sort=semver)](https://pkg.go.dev/github.com/otiai10/mint)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fotiai10%2Fmint.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fotiai10%2Fmint?ref=badge_shield)
 
 The very minimum assertion for Go.
