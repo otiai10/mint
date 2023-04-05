@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/otiai10/curr"
+	"github.com/otiai10/mint/curr"
 
 	"github.com/otiai10/mint"
 )
