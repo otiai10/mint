@@ -2,6 +2,7 @@ package curr
 
 import (
 	"os"
+	"path/filepath"
 	"testing"
 
 	. "github.com/otiai10/mint"
@@ -13,14 +14,16 @@ func init() {
 	pkgpath = os.Getenv("GITHUB_WORKSPACE")
 	if pkgpath == "" {
 		pkgpath = os.Getenv("GOPATH") + "/src/github.com/otiai10/mint/curr"
+	} else {
+		pkgpath = filepath.Join(pkgpath, "curr")
 	}
 }
 
 func TestLine(t *testing.T) {
 	Because(t, "Line() should provide current line", func(t *testing.T) {
-		Expect(t, Line()).ToBe(21)
-		// <- line 22
-		Expect(t, Line()).ToBe(23)
+		Expect(t, Line()).ToBe(24)
+		// <- line 25
+		Expect(t, Line()).ToBe(26)
 	})
 }
 
