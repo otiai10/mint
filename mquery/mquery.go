@@ -27,17 +27,27 @@ func queryMap(m any, t reflect.Type, qs []string) any {
 	if len(qs) == 0 {
 		return m
 	}
+	val := reflect.ValueOf(m)
+	if val.IsZero() {
+		return nil
+	}
 	switch t.Key().Kind() {
 	case reflect.String:
-		next := reflect.ValueOf(m).MapIndex(reflect.ValueOf(qs[0])).Interface()
-		return query(next, qs[1:])
+		val := reflect.ValueOf(m).MapIndex(reflect.ValueOf(qs[0]))
+		if !val.IsValid() {
+			return nil
+		}
+		return query(val.Interface(), qs[1:])
 	case reflect.Int:
 		i, err := strconv.Atoi(qs[0])
 		if err != nil {
 			return fmt.Errorf("cannot access map with keyword: %s: %v", qs[0], err)
 		}
-		next := reflect.ValueOf(m).MapIndex(reflect.ValueOf(i)).Interface()
-		return query(next, qs[1:])
+		val := reflect.ValueOf(m).MapIndex(reflect.ValueOf(i))
+		if !val.IsValid() {
+			return nil
+		}
+		return query(val.Interface(), qs[1:])
 	}
 	return nil
 }

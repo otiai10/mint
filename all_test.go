@@ -168,4 +168,6 @@ func TestTestee_Query(t *testing.T) {
 	mint.Expect(t, "foo").Query("foo").ToBe("foo")
 	mint.Expect(t, "foo").Query("bar").Not().ToBe("bar")
 	mint.Expect(t, v).Query("foo.name").ToBe("otiai10")
+	mint.Expect(t, v).Query("foo.age").ToBe(30)
+	mint.Expect(t, v).Query("foo.baa").ToBe(nil)
 }

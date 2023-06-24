@@ -24,12 +24,12 @@ type Testee struct {
 	required bool
 	verbose  bool
 
-	queriedFrom string // Only used when querying
+	// origin string // Only used when querying
 }
 
 // Query queries the actual value with given query string.
 func (testee *Testee) Query(query string) *Testee {
-	testee.queriedFrom = fmt.Sprintf("queried from %T", testee.actual)
+	// testee.origin = fmt.Sprintf("%T", testee.actual)
 	testee.actual = mquery.Query(testee.actual, query)
 	return testee
 }
@@ -122,6 +122,9 @@ func (testee *Testee) toText(fail int) string {
 		not = "NOT "
 	}
 	_, file, line, _ := runtime.Caller(3)
+	// if testee.origin != "" {
+	// 	testee.origin = fmt.Sprintf("(queried from %s)", testee.origin)
+	// }
 	return fmt.Sprintf(
 		scolds[fail],
 		filepath.Base(file), line,
