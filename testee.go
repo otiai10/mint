@@ -7,6 +7,8 @@ import (
 	"regexp"
 	"runtime"
 	"testing"
+
+	"github.com/otiai10/mint/mquery"
 )
 
 // Testee is holder of interfaces which user want to assert
@@ -21,6 +23,15 @@ type Testee struct {
 	result   MintResult
 	required bool
 	verbose  bool
+
+	queriedFrom string // Only used when querying
+}
+
+// Query queries the actual value with given query string.
+func (testee *Testee) Query(query string) *Testee {
+	testee.queriedFrom = fmt.Sprintf("queried from %T", testee.actual)
+	testee.actual = mquery.Query(testee.actual, query)
+	return testee
 }
 
 // ToBe can assert the testee to equal the parameter of this func.
