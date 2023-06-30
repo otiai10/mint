@@ -7,11 +7,11 @@ import (
 	"strings"
 )
 
-func Query(m any, q string) any {
+func Query(m interface{}, q string) interface{} {
 	return query(m, strings.Split(q, "."))
 }
 
-func query(m any, qs []string) any {
+func query(m interface{}, qs []string) interface{} {
 	t := reflect.TypeOf(m)
 	switch t.Kind() {
 	case reflect.Map:
@@ -23,7 +23,7 @@ func query(m any, qs []string) any {
 	}
 }
 
-func queryMap(m any, t reflect.Type, qs []string) any {
+func queryMap(m interface{}, t reflect.Type, qs []string) interface{} {
 	if len(qs) == 0 {
 		return m
 	}
@@ -52,7 +52,7 @@ func queryMap(m any, t reflect.Type, qs []string) any {
 	return nil
 }
 
-func querySlice(m any, t reflect.Type, qs []string) any {
+func querySlice(m interface{}, t reflect.Type, qs []string) interface{} {
 	if len(qs) == 0 {
 		return m
 	}

@@ -161,9 +161,9 @@ func TestRequire(t *testing.T) {
 }
 
 func TestTestee_Query(t *testing.T) {
-	v := map[string]any{
-		"foo": map[string]any{"name": "otiai10", "age": 30},
-		"bar": []any{100, "helllo"},
+	v := map[string]interface{}{
+		"foo": map[string]interface{}{"name": "otiai10", "age": 30},
+		"bar": []interface{}{100, "helllo"},
 	}
 	mint.Expect(t, "foo").Query("foo").ToBe("foo")
 	mint.Expect(t, "foo").Query("bar").Not().ToBe("bar")

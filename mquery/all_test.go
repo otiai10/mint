@@ -4,12 +4,12 @@ import (
 	"testing"
 )
 
-var m = map[string]any{
+var m = map[string]interface{}{
 	"foo": "bar",
-	"hoge": map[string]any{
+	"hoge": map[string]interface{}{
 		"name": "otiai10",
 	},
-	"fuga": map[int]map[string]any{
+	"fuga": map[int]map[string]interface{}{
 		0: {"greet": "Hello"},
 		1: {"greet": "こんにちは"},
 	},
